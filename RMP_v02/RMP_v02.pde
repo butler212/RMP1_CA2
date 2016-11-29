@@ -31,7 +31,8 @@ void draw()
   
   for(int i = 0; i < myAudio.bufferSize() - 1; i++)
   {
-    float
+    float x1 = map( i, 0, myAudio.bufferSize(), 0, width );
+    float x2 = map( i, 0, myAudio.bufferSize(), 0, width );
   }
   
 }  
