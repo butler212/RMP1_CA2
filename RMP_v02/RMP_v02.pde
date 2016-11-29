@@ -22,6 +22,11 @@ void setup()
   minim = new Minim(this);
   myAudio = minim.loadFile("enya.mp3");
   myAudio.loop();
+  
+   fft = new FFT( myAudio.bufferSize(), myAudio.sampleRate() ); 
+  // // perform a forward FFT on the samples in the tracks mix buffer,
+  // contains the mix of both the left and right channels of the file
+  
 }
 
 void draw()
@@ -36,6 +41,9 @@ void draw()
       line( x1, 50 + myAudio.left.get(i)*50, x2, 50 + myAudio.left.get(i+1)*150 );
       line( x1, 150 + myAudio.right.get(i)*50, x2, 150 + myAudio.right.get(i+1)*150 );
     }
+  fft.forward( myAudio.mix );
   
-  
+ for(int i = 0; i < fft.specSize(); i++){
+ }
+ 
 }  
