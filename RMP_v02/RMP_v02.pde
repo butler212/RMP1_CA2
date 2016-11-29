@@ -1,4 +1,5 @@
 
+//importing minim libraries & video library
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
@@ -11,10 +12,6 @@ Minim minim;  // a class for obtaining audio inputs, playing audio files
 AudioPlayer myAudio; //this will play & loop files
 FFT myAudioFFT; //This class is used to analyse audio spectrum
 
-//int myAudioRange = 256;
-//myAudioMax = 100;
-
-
 
 void setup()
 {
@@ -23,8 +20,8 @@ void setup()
   myAudio = minim.loadFile("enya.mp3");
   myAudio.loop();
   
-   fft = new FFT( myAudio.bufferSize(), myAudio.sampleRate() ); 
-  // // perform a forward FFT on the samples in the tracks mix buffer,
+   myAudioFFT = new FFT( myAudio.bufferSize(), myAudio.sampleRate() ); 
+  // perform a forward FFT on the samples in the tracks mix buffer,
   // contains the mix of both the left and right channels of the file
   
 }
@@ -41,9 +38,13 @@ void draw()
       line( x1, 50 + myAudio.left.get(i)*50, x2, 50 + myAudio.left.get(i+1)*150 );
       line( x1, 150 + myAudio.right.get(i)*50, x2, 150 + myAudio.right.get(i+1)*150 );
     }
-  fft.forward( myAudio.mix );
+  myAudioFFT.forward( myAudio.mix ); //analyser band
   
- for(int i = 0; i < fft.specSize(); i++){
- }
+ for(int i = 0; i < myAudioFFT.specSize(); i++)
+ {
  
+  // draw the line for frequency band i, scaling it upwards
+    line( i, height, i, height - myAudioFFT.getBand(i)*150 );
+  }  
+  
 }  
