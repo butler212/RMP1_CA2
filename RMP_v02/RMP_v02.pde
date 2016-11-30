@@ -2,10 +2,6 @@
 //importing minim libraries & video library
 import ddf.minim.*;
 import ddf.minim.analysis.*;
-import ddf.minim.effects.*;
-import ddf.minim.signals.*;
-import ddf.minim.spi.*;
-import ddf.minim.ugens.*;
 import processing.video.*;
 
 //declaring global variables
@@ -34,8 +30,15 @@ void setup()
   // perform a forward FFT on the samples in the tracks mix buffer,
   // contains the mix of both the left and right channels of the file
   
-  xml = loadXML("colour.xml");
+  xml = loadXML("colour.xml"); //loading xml file
+  XML[] children = xml.getChildren("change"); //returns an index array containing the child elements
   
+  for (int i = 0; i < children.length; i++) {
+    red = children[i].getInt("r");
+    green = children[i].getInt("g");
+    blue = children[i].getInt("b");
+    println(red + ", " + green + ", " + blue); //print values
+  }
   
 }
 
@@ -69,7 +72,7 @@ void draw()
   line(posx, 0, posx, height); //line pos
   
   
-  if ( myAudio.isPlaying() )
+  if ( myAudio.isPlaying() ) //if else statement for text on screen
     {
       text("Press the mouse to pause the track.", 40, 40 );
     }
@@ -80,7 +83,7 @@ void draw()
 }  
 
 
-void mousePressed()
+void mousePressed() //user interaction mouse click
 {
     if (myAudio.isPlaying() )
     {
