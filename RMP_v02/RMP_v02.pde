@@ -49,20 +49,29 @@ void draw()
   myAudioFFT.forward(myAudio.mix); //analyser band
   
  for(int i = 0; i < myAudioFFT.specSize(); i++)
- {
- 
-  // draw the line for frequency band i, scaling it upwards
-    line( i, height, i, height - myAudioFFT.getBand(i)*150 );
-  }  
+   {
+      //draw the line for frequency band i, scaling it upwards
+      line( i, height, i, height - myAudioFFT.getBand(i)*150 );
+   }  
    
    // drawing a line to show where the song playback is currently at
   float posx = map(myAudio.position(), 0, myAudio.length(), 0, width);
   stroke(207,218,220); //colour values 
   line(posx, 0, posx, height); //line pos
+  
+  
+  if ( myAudio.isPlaying() )
+    {
+      text("Press the mouse to pause the track.", 40, 40 );
+    }
+    else
+    {
+      text("Press the mouse to start the track.", 40, 40 );
+    }
 }  
 
 
-void keyPressed()
+void mousePressed()
 {
     if (myAudio.isPlaying() )
     {
@@ -71,8 +80,7 @@ void keyPressed()
     else
     {
       myAudio.play();
-  }
-
+    }
 }
 
 //calling movie function
