@@ -13,6 +13,12 @@ Movie bgMovie; // movie class
 Minim minim;  // a class for obtaining audio inputs, playing audio files 
 AudioPlayer myAudio; //this will play & loop files
 FFT myAudioFFT; //This class is used to analyse audio spectrum
+XML xml;
+int red;
+int green;
+int blue;
+
+
 
 //call set up function
 void setup()
@@ -27,6 +33,9 @@ void setup()
    myAudioFFT = new FFT( myAudio.bufferSize(), myAudio.sampleRate() ); 
   // perform a forward FFT on the samples in the tracks mix buffer,
   // contains the mix of both the left and right channels of the file
+  
+  xml = loadXML("colour.xml");
+  
   
 }
 
@@ -56,7 +65,7 @@ void draw()
    
    // drawing a line to show where the song playback is currently at
   float posx = map(myAudio.position(), 0, myAudio.length(), 0, width);
-  stroke(207,218,220); //colour values 
+  stroke(red,green,blue); //colour values 
   line(posx, 0, posx, height); //line pos
   
   
