@@ -8,7 +8,6 @@ import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 import processing.video.*;
 
-//declaring global variables
 Movie bgMovie; // movie class
 Minim minim;  // a class for obtaining audio inputs, playing audio files 
 AudioPlayer myAudio; //this will play & loop files
